@@ -1,0 +1,60 @@
+#ifndef TFileProxy_h
+#define TFileProxy_h
+
+#include "TFile.h"
+
+#include <string>
+#include <map>
+
+class TFileProxy {
+
+ public:
+
+  TFileProxy( const std::string& name, const std::string& mode ):
+   fName( name ) {
+     static std::map<std::string,TFile*>& m = fMap();
+     std::map<std::string,TFile*>::iterator iter = m.find( name );
+     if ( iter == m.end() ) {
+       m[name] = new TFile( name.c_str(), mode.c_str() );
+     }
+     else {
+       if ( ( mode != "" ) && ( mode != "READ" ) )
+            iter->second = new TFile( name.c_str(), "UPDATE" );
+       else iter->second = new TFile( name.c_str() );
+       iter->second->cd();
+     }
+  }
+  ~TFileProxy() {
+    Close();
+  }
+
+  bool cd() {
+    static std::map<std::string,TFile*>& m = fMap();
+    return m[fName]->cd();
+  }
+
+  void Close() {
+    static std::map<std::string,TFile*>& m = fMap();
+    TFile*& file = m[fName];
+    if ( file == 0 ) return;
+    file->Close();
+    delete file;
+    file = 0;
+    return;
+  }
+
+ private:
+
+  std::string fName;
+  static std::map<std::string,TFile*>& fMap() {
+    static std::map<std::string,TFile*>* m = new std::map<std::string,TFile*>;
+    return *m;
+  }
+
+  TFileProxy           ( const TFileProxy& x );
+  TFileProxy& operator=( const TFileProxy& x );
+
+};
+
+#endif
+

@@ -1,0 +1,79 @@
+#ifndef Reader_h
+#define Reader_h
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+class TxtReader;
+class BinReader;
+
+// interface classes to give uniform access to text and binary files
+class Reader {
+ public:
+  Reader() {}
+  virtual ~Reader() { delete is; }
+  template <class T>
+  Reader& operator>>( T& x ) {
+    Wrapper<T> w( x );
+    read( w );
+    return *this;
+  }
+  operator bool() { return status; }
+  std::istream& get() { return *is; }
+ protected:
+  std::istream* is;
+  bool status;
+  class BaseWrapper {
+   public:
+    BaseWrapper() {}
+    virtual bool read( TxtReader* r ) = 0;
+    virtual bool read( BinReader* r ) = 0;
+  };
+ private:
+  template <class T>
+  class Wrapper: public BaseWrapper {
+   public:
+    Wrapper( T& x ): p( &x ) {}
+    virtual bool read( TxtReader* r ) {
+      return ( r->get() >> *p );
+    }
+    virtual bool read( BinReader* r ) {
+      return r->get().read( reinterpret_cast<char*>( p ), sizeof( *p ) );
+    }
+   private:
+    T* p;
+  };
+  virtual void read( BaseWrapper& w ) = 0;
+};
+
+class TxtReader: public Reader {
+ public:
+  TxtReader( const std::string& name ) {
+    is = new std::ifstream( name.c_str() );
+  }
+ private:
+  virtual void read( BaseWrapper& w ) { status = w.read( this ); } 
+};
+
+class BinReader: public Reader {
+ public:
+  BinReader( const std::string& name ) {
+    is = new std::ifstream( name.c_str(), std::ios::binary );
+  }
+ private:
+  virtual void read( BaseWrapper& w ) { status = w.read( this ); } 
+};
+
+class ReaderFactory {
+ public:
+  static Reader* create( const std::string& name,
+                         std::ios::openmode mode = std::ios::in ) {
+    if ( mode & std::ios::binary )
+    return new BinReader( name );
+    return new TxtReader( name );
+  }
+};
+
+#endif
+

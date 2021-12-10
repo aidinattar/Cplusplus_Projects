@@ -1,0 +1,53 @@
+#ifndef Reader_h
+#define Reader_h
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+// interface classes to give uniform access to text and binary files
+class Reader {
+  friend class ReaderFactory;
+ public:
+  ~Reader() { delete is; }
+  template <class T>
+  Reader& operator>>( T& x ) {
+    switch ( type ) {
+    case 't':
+      status = ( *is >> x );
+      break;
+    case 'b':
+      status = is->read( &x, sizeof( x ) );
+      break;
+    default:
+      break;
+    }
+    return *this;
+  }
+  operator bool() { return status; }
+ private:
+  Reader() {}
+  char type;
+  std::istream* is;
+  bool status;
+};
+
+class ReaderFactory {
+ public:
+  static Reader* create( const std::string& name,
+                         std::ios::openmode mode = std::ios::in ) {
+    Reader* r = new Reader;
+    if ( mode & std::ios::binary ) {
+      r->is = new std::ifstream( name.c_str(), std::ios::binary );
+      r->type = 'b';
+    }
+    else {
+      r->is = new std::ifstream( name.c_str() );
+      r->type = 't';
+    }
+    return r;
+  }
+};
+
+#endif
+
