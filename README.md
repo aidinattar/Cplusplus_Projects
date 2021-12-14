@@ -44,14 +44,6 @@ For each event try to read the event identifier in the "main", and on
 success call the "read" function to read the other data and then call
 the "dump" function.
 
-********* final list of functions *********
-
-main                   to do
-
-read                   to do
-
-dump                   to do
-
 ## particle_dump_v2
 
 ---- Modify Dump_v1 and use structs ----
@@ -86,18 +78,6 @@ delete the array of the pointers and at last the Event struct.
 ***
 Create a "main" function taking the file name from the command string,
 reading the file and calling the dump and clear functions.
-
-********* final list of functions *********
-
-main                   to do
-
-struct Event, Particle to do
-
-read                   to do
-
-clear                  to do
-
-dump                   to do
 
 ## particleMean_v1
 
@@ -197,22 +177,6 @@ the return value of the "add" function.
 
 Compute mean and rms mass from the sum of masses and squares and
 print the results on the screen.
-
-********* final list of files/functions *********
-
-main                   modify Dump_v2
-
-struct Event           copy   Dump_v2
-
-read                   copy   Dump_v2
-
-clear                  copy   Dump_v2
-
-dump                   copy   Dump_v2
-
-mass                   to complete
-
-add                    to do
 
 ## particleMean_v2
 
@@ -320,27 +284,6 @@ In the event loop call the function "add" for both instances and replace the
 call to the "clear" function with a call to the operator "delete"; at the end 
 call the function "compute" and print the results for both instances as well.
 
-********* final list of functions *********
-
-main                   to complete
-
-read                   modify Mean_v1
-
-dump                   modify Mean_v1
-
-mass                   modify Mean_v1
-
-********* final list of classes   *********
-
-                       .h                            .cc
-Event                  to complete                   to complete
-
-MassMean               to complete                   to complete
-
-Constants              to do                         to do
-
-Utilities              to do                         to do
-
 ## particleMean_v3
 
 
@@ -360,28 +303,6 @@ Nel costruttore riservare per il vector un numero di elementi uguale a 10.
 
 ***
 Modificare la funzione "main" per usare una std::string per l'input del nome del file.
-
-********* final list of functions *********
-
-main                   modify Mean_v2
-
-read                   copy   Mean_v2
-
-dump                   copy   Mean_v2
-
-mass                   copy   Mean_v2
-
-********* final list of classes   *********
-
-                       .h                            .cc
-
-Event                  modify Mean_v2                modify Mean_v2
-
-MassMean               copy   Mean_v2                copy   Mean_v2
-
-Constants              copy   Mean_v2                copy   Mean_v2
-
-Utilities              copy   Mean_v2                copy   Mean_v2
 
 ## particleMean_v4
 
@@ -444,35 +365,6 @@ Modificare la fuzione "main" per usare le classi modificate usando il file
 analizzatori: "ParticleMass" al posto di "ElementReco").
 Per simulare gli eventi usare la classe "EventSim".
 
-********* lista finale di funzElementRecoioni *********
-
-main                   modify braggMean_v4
-mass                   copy   Mean_v3
-
-********* lista finale di classi   *********
-
-                       .h                            .cc
-
-Event                  copy   Mean_v3                copy   Mean_v3
-
-EventReadFromFile      copy   braggMean_v4           to do
-
-EventSim               done                          done
-
-AnalysisSteering       copy   braggMean_v4           copy   braggMean_v4
-
-EventSource            copy   braggMean_v4           copy   braggMean_v4
-
-MassMean               copy   Mean_v3                copy   Mean_v3
-
-ParticleMass           to do                         to do
-
-EventDump              copy   braggMean_v4           to do
-
-Constants              copy   Mean_v3                copy   Mean_v3
-
-Utilities              copy   Mean_v3                copy   Mean_v3
-
 EventReadFromFile è classe derivata di EventSource, quindi il distruttore
 è virtual. Stessa cosa vale per EventSim.
 
@@ -521,14 +413,6 @@ Per ogni evento provare a leggere il numero identificativo dell'evento nel main,
 e in caso di successo chiamare la funzione "read" per leggere gli alti dati 
 e poi chiamare la funzione "dump".
 
-********* lista finale delle funzioni *********
-
-main                   da fare
-
-read                   da fare
-
-dump                   da fare
-
 ## particleHist_v2
 
 ---- Modificare Hist_v1 e usare un factory per creare data source ----
@@ -557,27 +441,6 @@ Modificare "main.cc" prendendo "braggPlot_v2" come referenza:
   SourceFactory" al suo posto
 - rimuovere gli header files non necessari
 
-********* lista finale delle funzioni *********
-
-main                   modify Hist_v1
-mass                   copy   Hist_v1
-
-********* lista finale delle classi   *********
-
-                       .h| |                          .cc||
-AnalysisInfo       |    copy  | braggPlot_v2      |     copy |  braggPlot_v2
-SourceFactory       |   copy  | braggPlot_v2      |     copy |  braggPlot_v2
-Event               |   copy  | Hist_v1          |      copy |  Hist_v1
-EventSource         |   copy  | Hist_v1         |       copy |  Hist_v1
-EventReadFromFile   |   copy  | Hist_v1         |       copy |  Hist_v1
-EventSim            |   copy  | Hist_v1         |       copy |  Hist_v1
-AnalysisSteering    |  copy   |Hist_v1          |      copy  | Hist_v1
-EventDump           |   copy  | Hist_v1        |        copy |  Hist_v1
-ParticleMass        |   copy  | Hist_v1        |        copy |  Hist_v1
-MassMean            |   copy  | Hist_v1        |        copy |  Hist_v1
-Constants           |   copy  | Hist_v1        |        copy |  Hist_v1
-Utilities           |   copy  | Hist_v1        |        copy |  Hist_v1
-
 ## particleHist_v3
 
 ---- Modify Hist_v2 and use a factory to create data analyzers ----
@@ -601,28 +464,6 @@ reference:
 
 ***
 Modify the "main" function to use "AnalysisFactory".
-
-********* final list of functions *********
-
-main                   modify Hist_v3 or copy braggPlot_v3
-mass                   copy   Hist_v2
-
-********* final list of classes   *********
-
-                       .h                            .cc
-AnalysisFactory        copy   braggPlot_v3           copy   braggPlot_v3
-AnalysisSteering       copy   braggPlot_v3           copy   braggPlot_v3
-AnalysisInfo           copy   Hist_v2                copy   Hist_v2
-SourceFactory          copy   Hist_v2                copy   Hist_v2
-Event                  copy   Hist_v2                copy   Hist_v2
-EventSource            copy   Hist_v2                copy   Hist_v2
-EventReadFromFile      copy   Hist_v2                copy   Hist_v2
-EventSim               copy   Hist_v2                copy   Hist_v2
-EventDump              modify Hist_v2                modify Hist_v2
-ParticleMass           modify Hist_v2                modify Hist_v2
-MassMean               copy   Hist_v2                copy   Hist_v2
-Constants              copy   Hist_v2                copy   Hist_v2
-Utilities              copy   Hist_v2                copy   Hist_v2
 
 ## particleHist_v4
 
@@ -745,31 +586,6 @@ Salvare gli istogrammi per la massa e per il tempo di decadimento nello stesso
 file ROOT; usare un TFileProxy (nel pacchetto "util") per gestire accessi
 multipli agli stessi file ROOT nella stessa esecuzione.
 
-********* lista finale delle funzioni *********
-
-main                   modify Hist_v3 or copy braggPlot_v4
-
-********* final list of classes   *********
-
-                       .h                            .cc
-AnalysisFactory        copy   Hist_v3                copy   Hist_v3
-AnalysisSteering       modify Hist_v3                copy   Hist_v3
-AnalysisInfo           copy   Hist_v3                copy   Hist_v3
-SourceFactory          copy   Hist_v3                copy   Hist_v3
-Event                  copy   Hist_v3                copy   Hist_v3
-EventSource            modify Hist_v3                modify Hist_v3
-EventReadFromFile      copy   Hist_v3                copy   Hist_v3
-EventSim               copy   Hist_v3                copy   Hist_v3
-EventDump              modify Hist_v3                modify Hist_v3
-ParticleMass           modify Hist_v3                modify Hist_v3
-MassMean               copy   Hist_v3                modify Hist_v3
-Constants              modify Hist_v3                modify Hist_v3
-Utilities              copy   Hist_v3                copy   Hist_v3
-ParticleReco           to complete                   to complete
-ProperTime             to do                         to do
-LifetimeFit            to do                         to do
-ParticleLifetime       to do                         to do
-
 ## particleHist_v5
 
 ---- Modify Hist_v4 and use dispatcher&observers to handle begin/end job ----
@@ -863,30 +679,6 @@ In "ParticleLifetime.h,cc"
   to handle the increased number of parameters needed by the LifetimeFit 
   constructor.
 
-********* final list of functions *********
-
-main                   modify Hist_v4 or copy braggPlot_v5
-
-********* final list of classes   *********
-
-                       .h                            .cc
-AnalysisInfo           copy   braggPlot_v5           copy   Hist_v4
-AnalysisSteering       copy   braggPlot_v5           copy   braggPlot_v5
-SourceFactory          copy   Hist_v4                copy   Hist_v4
-Event                  copy   Hist_v4                copy   Hist_v4
-EventSource            copy   Hist_v4                copy   Hist_v4
-EventReadFromFile      copy   Hist_v4                copy   Hist_v4
-EventSim               copy   Hist_v4                copy   Hist_v4
-EventDump              copy   Hist_v4                copy   Hist_v4
-ParticleMass           copy   Hist_v4                modify Hist_v4
-MassMean               copy   Hist_v4                copy   Hist_v4
-Constants              copy   Hist_v4                copy   Hist_v4
-Utilities              copy   Hist_v4                copy   Hist_v4
-ParticleReco           copy   Hist_v4                copy   Hist_v4
-ProperTime             copy   Hist_v4                copy   Hist_v4
-LifetimeFit            modify Hist_v4                modify Hist_v4
-ParticleLifetime       modify Hist_v4                modify Hist_v4
-QuadraticFitter        done                          done
 
 ## particleHist_v6
 
@@ -904,28 +696,28 @@ Create 4 directories
 Move all the source files to those directories:
 
 - to AnalysisFramework:
-  main.cc
-  AnalysisInfo.h,cc
-  Event.h,cc
-  EventSource.h,cc
-  EventReadFromFile.h,cc
-  EventSim.h,cc
-  SourceFactory.h,cc
-  AnalysisSteering.h,cc
-  AnalysisFactory.h,cc
+  - main.cc
+  - AnalysisInfo.h,cc
+  - Event.h,cc
+  - EventSource.h,cc
+  - EventReadFromFile.h,cc
+  - EventSim.h,cc
+  - SourceFactory.h,cc
+  - AnalysisSteering.h,cc
+  - AnalysisFactory.h,cc
 - to AnalysisUtilities:
-  Constants.h,cc
-  Utilities.h,cc
-  QuadraticFitter.h,cc
+  - Constants.h,cc
+  - Utilities.h,cc
+  - QuadraticFitter.h,cc
 - to AnalysisObjects:
-  ParticleReco.h,cc
-  ProperTime.h,cc
-  MassMean.h,cc
-  LifetimeFit.h,cc
+  - ParticleReco.h,cc
+  - ProperTime.h,cc
+  - MassMean.h,cc
+  - LifetimeFit.h,cc
 - to AnalysisPlugins:
-  EventDump.h,cc
-  ParticleMass.h,cc
-  ParticleLifetime.h,cc
+  - EventDump.h,cc
+  - ParticleMass.h,cc
+  - ParticleLifetime.h,cc
 
 ***
 Update the paths in all the #include instructions
