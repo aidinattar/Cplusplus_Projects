@@ -47,7 +47,9 @@ the "dump" function.
 ********* final list of functions *********
 
 main                   to do
+
 read                   to do
+
 dump                   to do
 
 ## particle_dump_v2
@@ -88,9 +90,13 @@ reading the file and calling the dump and clear functions.
 ********* final list of functions *********
 
 main                   to do
+
 struct Event, Particle to do
+
 read                   to do
+
 clear                  to do
+
 dump                   to do
 
 ## particleMean_v1
@@ -147,6 +153,7 @@ Loop over the particles, and for each one:
   components and the pion mass for a negative particle or proton mass
   for a positive particle,
 - update the total energy sum for both the K0 and Lambda0 hypotheses.
+
 Check the number of positive and negative particles, and return a
 negative (unphysical) value if one of the two is different than one.
 Compute the invariant mass for both the K0 and Lambda0 hypotheses, and
@@ -161,8 +168,10 @@ Create a function "add" taking as arguments:
 - two float for min and max invariant mass
 - two references to double for the sum of invariant masses
   and the the sum of squares,
+
 Inside the function compute the invariant mass of the decay particle,
 using the "mass" function described above.
+
 If the mass is comprised between the minimum and maximum increase the sums
 of masses and squares, otherwise leave those sums unchanged.
 Return true or false if the mass was in the range or not, respectively.
@@ -178,22 +187,31 @@ Add 5 variables:
 - one to contain the sum of squares of invariant masses,
 - one to contain the mean invariant mass,
 - one to contain the rms  invariant mass.
+
 In the event loop call the "add" function, using 0.490 and 0.505 as
 min and max invariant mass; disable the call to the "dump" function
 with "//", if you prefer.
+
 Compute the number of events by increasing the counter according to
 the return value of the "add" function.
+
 Compute mean and rms mass from the sum of masses and squares and
 print the results on the screen.
 
 ********* final list of files/functions *********
 
 main                   modify Dump_v2
+
 struct Event           copy   Dump_v2
+
 read                   copy   Dump_v2
+
 clear                  copy   Dump_v2
+
 dump                   copy   Dump_v2
+
 mass                   to complete
+
 add                    to do
 
 ## particleMean_v2
@@ -225,8 +243,10 @@ Add to the class:
   to the corresponding particle, if existing, or a null pointer if the
   particle does not exist (i.e. when the argument is bigger than the number
   of particles).
+
 Declare "const" the functions returning event data
 ("eventNumber", "x", "y", "z").
+
 Create and delete the array of pointers to the particles in the constructor
 and destructor, using the maximum number of particles as size; in the
 destructor delete all the particles too, before deleting the array.
@@ -268,7 +288,9 @@ Create a class "MassMean" with the following private members:
 - the number of selected events,
 - two numbers for sum of masses and sum of squares,
 - two numbers for mean and rms.
+
 Add to the class:
+
 - a constructor taking the min and max invariant mass as parameters,
 - a destructor,
 - a function "add" taking as argument a reference to const-Event,
@@ -276,6 +298,7 @@ Add to the class:
 - a function "compute" to compute mean and rms,
 - a function "nEvents" returning the number of selected events,
 - two functions "mMean" and "mRMS" returning the mean and rms.
+
 Initialize all the variables in the costructor.
 In the function "add" compute the invariant mass calling the "mass" function, 
 check if the result is in the required range, if yes increase the event
@@ -288,8 +311,11 @@ parameter used to select events inside the mass range.
 ***
 In the "main" function create 2 instances of "MassMean", to select 
 events with invariant mass in the ranges:
+
 K0      : min = 0.490 , max = 0.505
+
 Lambda0 : min = 1.114 , max = 1.118
+
 In the event loop call the function "add" for both instances and replace the 
 call to the "clear" function with a call to the operator "delete"; at the end 
 call the function "compute" and print the results for both instances as well.
@@ -297,16 +323,22 @@ call the function "compute" and print the results for both instances as well.
 ********* final list of functions *********
 
 main                   to complete
+
 read                   modify Mean_v1
+
 dump                   modify Mean_v1
+
 mass                   modify Mean_v1
 
 ********* final list of classes   *********
 
                        .h                            .cc
 Event                  to complete                   to complete
+
 MassMean               to complete                   to complete
+
 Constants              to do                         to do
+
 Utilities              to do                         to do
 
 ## particleMean_v3
@@ -332,16 +364,23 @@ Modificare la funzione "main" per usare una std::string per l'input del nome del
 ********* final list of functions *********
 
 main                   modify Mean_v2
+
 read                   copy   Mean_v2
+
 dump                   copy   Mean_v2
+
 mass                   copy   Mean_v2
 
 ********* final list of classes   *********
 
                        .h                            .cc
+
 Event                  modify Mean_v2                modify Mean_v2
+
 MassMean               copy   Mean_v2                copy   Mean_v2
+
 Constants              copy   Mean_v2                copy   Mean_v2
+
 Utilities              copy   Mean_v2                copy   Mean_v2
 
 ## particleMean_v4
@@ -413,17 +452,26 @@ mass                   copy   Mean_v3
 ********* lista finale di classi   *********
 
                        .h                            .cc
-Event                  copy   Mean_v3                copy   Mean_v3
-EventReadFromFile      copy   braggMean_v4           to do
-EventSim               done                          done
-AnalysisSteering       copy   braggMean_v4           copy   braggMean_v4
-EventSource            copy   braggMean_v4           copy   braggMean_v4
-MassMean               copy   Mean_v3                copy   Mean_v3
-ParticleMass           to do                         to do
-EventDump              copy   braggMean_v4           to do
-Constants              copy   Mean_v3                copy   Mean_v3
-Utilities              copy   Mean_v3                copy   Mean_v3
 
+Event                  copy   Mean_v3                copy   Mean_v3
+
+EventReadFromFile      copy   braggMean_v4           to do
+
+EventSim               done                          done
+
+AnalysisSteering       copy   braggMean_v4           copy   braggMean_v4
+
+EventSource            copy   braggMean_v4           copy   braggMean_v4
+
+MassMean               copy   Mean_v3                copy   Mean_v3
+
+ParticleMass           to do                         to do
+
+EventDump              copy   braggMean_v4           to do
+
+Constants              copy   Mean_v3                copy   Mean_v3
+
+Utilities              copy   Mean_v3                copy   Mean_v3
 
 EventReadFromFile è classe derivata di EventSource, quindi il distruttore
 è virtual. Stessa cosa vale per EventSim.
