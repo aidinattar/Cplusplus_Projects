@@ -1,7 +1,8 @@
 # Cplusplus_Projects
 
-Projects of the course of Object-Oriented Programming and C++ of the Bachelor's Degree in Physics of the University of Padua.
-Professor. Paolo Ronchese
+Object-Oriented Programming and C++ course A.Y. 2019/2020.
+
+Prof. Paolo Ronchese
 
 ## particle_dump_v1
 
