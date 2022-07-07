@@ -1,39 +1,36 @@
-## particle_dump_v1
+### Modify Mean_v4 and produce histograms of invariant mass
 
-- Read the text file `particle_events.txt`
-
-The file contains a sequence of events, and for each event:
-
-  - an integer identifier,
-  - the 3 decay point coordinates
-  - the number of particles,
-  - for each particle the electric charge and the 3 momentum components
+Include histograms inside `ParticleMass` class.
 
 
-Create a function "read" taking as arguments:
-
-  - the reference to an input file stream,
-  - the reference to 3 floats to fill with the decay point coordinates,
-  - an array of integers to fill with electric charges,
-  - 3 arrays of float to fill with momenta components and returning the number of particles.
-
-
-Create a function `dump` taking as argument:
-
-  - the number of the event,
-  - the number of particles,
-  - 3 floats for the decay point coordinates,
-  - an array of integers containing electric charges,
-  - 3 arrays of float containing momenta components and printing a dump on the screen.
-
-Write on the screen only the numbers, do not add any text as "Event number:"
-or "these are the particles:"; the output should be usable as input for
-a following run of the program.
+In `ParticleMass.h`:
+- define a `Particle` struct to hold
+  - a string to be used as name,
+  - a pointer to `MassMean`,
+  - a pointer to `TH1F`,
+- modify the STL array to hold pointers to `Particle` objects,
+- declare a function `pCreate` to create a `decay mode` (use `bCreate`
+  function in `ElementReco` as example).
 
 
-Create a `main` function taking the file name from the command string,
-opening the file and calling the read and dump functions.
-Dimension the arrays in the "main", using 10 as max number of particles.
-For each event try to read the event identifier in the "main", and on
-success call the "read" function to read the other data and then call
-the `dump` function.
+
+In `MassMean.h,cc`
+- change the `add` function to `bool` and return true or false for events
+  in the mass range or not.
+
+
+
+In `ParticleMass.cc`:
+- implement the function `pCreate` taking 3 arguments, one string and min-max
+  masses; use the name as name for `TH1F` and min-max masses 
+  to create the `MassMean` object; store the pointers of the objects;
+- in `beginJob` replace the direct creation of `MassMean` object with 
+  calls to `pCreate` for the 2 decay modes (use 0.495-0.500 and
+  1.115-1.116 as ranges);
+- in `endJob` loop over the Particle objects and for each one 
+  get the event number, mean and rms masses and printout them, then
+  save the histogram to file;
+- in `process` loop over the ParticleMass objects, call the 
+  `add` function for each `MassMean` object and fill the histogram
+  with the invariant mass for the accepted events.
+  Do not worry about multiple calls to `mass` function for the same event.
